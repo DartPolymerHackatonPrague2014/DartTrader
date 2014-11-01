@@ -54,5 +54,12 @@ class MaPlanetDetail extends PolymerElement {
     ($['buy-slider'] as PaperSlider).value = 0;    
   }
   
+  void doTrade(Event e, var detail, Node sender) {
+    PaperSlider ps = ($['buy-slider'] as PaperSlider);
+    int buy = ps.value;
+    player.comodities[tradingComodity] += buy;
+    player.money -= buy * planet.comodities[tradingComodity].priceSell;
+    print("Buy: ${buy}");
+  }
   
 }

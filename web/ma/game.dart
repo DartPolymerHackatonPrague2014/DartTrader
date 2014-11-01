@@ -61,6 +61,7 @@ class Player extends Observable {
     COMODITIES.forEach((c) {
       comodities[c] = 0;
     });
+    comodities = toObservable(comodities);
   }
   
 }

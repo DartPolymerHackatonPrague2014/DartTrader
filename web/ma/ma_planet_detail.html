@@ -52,7 +52,8 @@
         <p>This planet is too far, buy more fuel!</p>
       </template>
       <template if="{{player.fuel >= planet.distance}}">
-        <p><paper-button label="Warp here! (-{{planet.distance}} fuel)" raised on-click="{{onClickWarp}}">
+        <p><paper-button label="Warp here! (-{{planet.distance}} fuel)" raised on-click="{{onClickWarp}}"
+        style="background: #fff;">
           <core-icon icon="check"></core-icon>
         </paper-button></p>
       </template>
@@ -78,7 +79,7 @@
         </div>       
       </div>
       <paper-button label="Kašlu na to" dismissive></paper-button>
-      <paper-button label="Jo!" affirmative autofocus></paper-button>
+      <paper-button label="Jo!" affirmative autofocus on-click="{{doTrade}}"></paper-button>
     </paper-dialog>
     
     
