@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample app</title>
+    
+    <script src="packages/web_components/platform.js"></script>
+    <script src="packages/web_components/dart_support.js"></script>
+    
+    <link rel="import" href="packages/paper_elements/roboto.html">
+    <link rel="import" href="packages/paper_elements/paper_shadow.html">    
+    
+    <link rel="import" href="ma/ma_application.html">
+    <link rel="import" href="ma/ma_link.html">            
+    <link rel="import" href="ma/ma_game.html">
+    
+    <script type="application/dart">export 'package:polymer/init.dart';</script>
+    <script src="packages/browser/dart.js"></script>
+    
+    <style>
+    html, body {
+      font-family: RobotoDraft, sans-serif;      
+      height: 100%;
+      margin: 0;
+    }     
+    
+    </style>
+  </head>
+  <body unresolved>
+      
+      <ma-application name="Dart Trader">
+          <nav>
+            <ma-link icon="send" label="Game" sectionId="game"></ma-link>
+            <ma-link icon="info" label="About" sectionId="about"></ma-link>
+          </nav>
+                                       
+          <section id="game" >
+            <ma-game></ma-game>
+          </section>
+          
+          <section id="about">
+            <div style="margin: 50px; padding: 50px">
+              <paper-shadow z="2"></paper-shadow>
+              
+              Totok je husté.
+              
+            </div>            
+          </section>
+      
+      </ma-application>
+      
+  </body>
+</html>

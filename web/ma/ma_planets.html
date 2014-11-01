@@ -1,0 +1,16 @@
+<link rel="import" href="packages/paper_elements/paper_item.html">    
+    
+<polymer-element name="ma-planets" attributes="planets">
+  <template>
+    <table>
+      <tr>
+        <th>Name</th>
+      </tr>
+    <tr template repeat="{{ planet in planets | enumerate }}" on-click="{{onPlanetClick}}" data-index="{{planet.index}}">
+          <td>{{planet.index}} {{planet.value.name}}</td>
+    </tr>
+    </table>
+ </template>
+  
+  <script type="application/dart" src="ma_planets.dart"></script>
+</polymer-element>

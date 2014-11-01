@@ -1,0 +1,8 @@
+name: dart_trader
+description: A sample Polymer application
+dependencies:
+    polymer: any
+    paper_elements: any
+transformers:
+- polymer:
+    entry_points: web/dart_trader.html

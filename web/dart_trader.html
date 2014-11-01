@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample app</title>
+    
+    <script src="packages/web_components/platform.js"></script>
+    <script src="packages/web_components/dart_support.js"></script>
+    
+    <link rel="import" href="packages/core_elements/core_header_panel.html">
+    <link rel="import" href="packages/core_elements/core_toolbar.html">
+    <link rel="import" href="packages/paper_elements/roboto.html">
+    <link rel="import" href="ma/ma_game.html">
+        
+    <script type="application/dart">export 'package:polymer/init.dart';</script>
+    <script src="packages/browser/dart.js"></script>
+    
+    <style>
+    html, body {
+      font-family: RobotoDraft, sans-serif;      
+      height: 100%;
+      margin: 0;
+    }         
+    </style>
+  </head>
+  <body unresolved fullbleed layout vertical >
+      
+        <core-header-panel fit>
+
+          <core-toolbar>
+            <div id="title">Dart Trader</div>
+            <div flex></div>
+          </core-toolbar>
+           
+           <div fit style="padding: 1em; border: 1px solid black">            
+            <ma-game></ma-game>                 
+           </div>  
+        
+        </core-header-panel>      
+      
+  </body>
+</html>

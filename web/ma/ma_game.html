@@ -1,0 +1,26 @@
+<link rel="import" href="packages/paper_elements/paper_item.html">    
+<link rel="import" href="ma_player.html">
+<link rel="import" href="ma_planets.html">
+<link rel="import" href="ma_planet_detail.html">
+    
+<polymer-element name="ma-game">
+  <template>    
+    
+    <div id="planets" style="height: 70%; width: 69%; float: left; border: 1px solid black; overflow: scroll;">
+      <ma-planets planets="{{game.planets}}" on-select-planet="{{selectPlanet}}"></ma-planets> 
+    </div>
+    
+    <div id="planet" style="height: 70%; width: 29%; float: right; border: 1px solid black;">
+      <ma-planet-detail planet="{{selectedPlanet}}"></ma-planet-detail>  
+    </div>
+    
+    <br style="clear: both;">
+    
+    <div id="player" style="height: 30%; border: 1px solid black;">
+      <ma-player player="{{game.player}}"></ma-player>                
+    </div>
+        
+      
+  </template>
+  <script type="application/dart" src="ma_game.dart"></script>
+</polymer-element>
