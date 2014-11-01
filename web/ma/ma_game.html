@@ -5,19 +5,31 @@
     
 <polymer-element name="ma-game">
   <template>    
+    <div layout vertical fit>
+      
+      <div layout horizontal flex>
     
-    <div id="planets" style="height: 70%; width: 69%; float: left; border: 1px solid black; overflow: scroll;">
-      <ma-planets planets="{{sortedPlanets}}" player="{{game.player}}" on-select-planet="{{selectPlanet}}"></ma-planets> 
-    </div>
+        <div id="planets" flex style="padding: 1em; overflow: scroll;">
+          <ma-planets 
+            planets="{{sortedPlanets}}" 
+            player="{{game.player}}"
+            selectedPlanet="{{selectedPlanet}}" 
+            on-select-planet="{{selectPlanet}}"></ma-planets> 
+        </div>
     
-    <div id="planet" style="height: 70%; width: 29%; float: right; border: 1px solid black;">
-      <ma-planet-detail planet="{{selectedPlanet}}" player="{{game.player}}" on-warp="{{warp}}"></ma-planet-detail>  
-    </div>
+        <div id="planet" style="width: 400px; padding: 1em;" layout vertical>
+          <ma-planet-detail
+            planet="{{selectedPlanet}}"
+            player="{{game.player}}"
+            on-warp="{{warp}}" flex></ma-planet-detail>
+        </div>
     
-    <br style="clear: both;">
+      </div>
     
-    <div id="player" style="height: 30%; border: 1px solid black;">
+    <div id="player" style="padding: 1em;  background-color: #226; color: white;">
       <ma-player player="{{game.player}}"></ma-player>                
+    </div>
+    
     </div>
         
       

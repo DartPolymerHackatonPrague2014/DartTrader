@@ -14,6 +14,7 @@ class MaGame extends PolymerElement {
   MaGame.created() : super.created() {
     game = new Game(); 
     sortedPlanets = toObservable(game.planets, deep:false);    
+    selectedPlanet = game.player.onPlanet;
     _sortPlanets();
   }
   

@@ -1,28 +1,86 @@
 <link rel="import" href="packages/paper_elements/paper_item.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="packages/paper_elements/paper_dialog.html">
+<link rel="import" href="packages/paper_elements/paper_slider.html">
+<link rel="import" href="packages/paper_elements/paper_dialog_transition.html">
 <link rel="import" href="packages/core_elements/core_icons.html">        
         
 <polymer-element name="ma-planet-detail" attributes="planet player">
-  <template>    
-    {{planet.name}}<br>
+  <template>  
+    <style>
+      .not-available {
+        color: #aaa;
+      }
+    </style>
     
+    <div layout vertical style="height: 100%">
+      
+     <h3>{{planet.name}}</h3>
+
+     <table style="width: 100%">
+        <tr>
+          <td></td>
+          <td>mají tam</td>
+          <td>zaplatíš</td>
+          <td>dostaneš</td>          
+        </tr>
+        <tr on-click="{{openDialog}}" template repeat="{{c in comodities | enumerate}}"
+          class="{{planet.comodities[c.value].available ? '' : 'not-available'}}"
+          data-comodity="{{c.index}}">
+          <td style="width: 50%;">{{c.value.name}}</td>
+          <td>{{planet.comodities[c.value].amount}}</td>
+          <td>{{planet.comodities[c.value].priceSell}}</td>
+          <td>{{planet.comodities[c.value].priceBuy}}</td>
+        </tr>
+        <tr>
+          <td>Fuel</td>
+          <td></td>
+          <td>{{planet.fuelPrice}}</td>
+          <td></td>
+        </tr>
+     </table>        
+   
+    <div flex>&nbsp;</div>
     
     <template if="{{player.onPlanet == planet}}">
-    You are here!
-    
-    
+    <p>You are here!</p>
     
     </template>
     <template if="{{player.onPlanet != planet}}">
     
       <template if="{{player.fuel < planet.distance}}">
-        This planet is too far!
+        <p>This planet is too far, buy more fuel!</p>
       </template>
       <template if="{{player.fuel >= planet.distance}}">
-        <paper-button label="Warp here!" icon="check" on-click="{{onClickWarp}}"></paper-button>
+        <p><paper-button label="Warp here! (-{{planet.distance}} fuel)" raised on-click="{{onClickWarp}}">
+          <core-icon icon="check"></core-icon>
+        </paper-button></p>
       </template>
             
     </template>    
+    
+    </div>
+    
+    <paper-dialog heading="Buy'n'Sell: {{tradingComodity.name}}" transition="paper-dialog-transition-center" id="buySell" style="width: 50%">
+      <div layout vertical>
+        <p>Buy</p>
+        <div layout horizontal>
+          <paper-slider min="0" max="{{maxBuy}}" pin value="0" flex
+          on-core-change="{{estimateBuy}}" id="buy-slider"></paper-slider>
+          <div style="width: 100px; text-align:right;">{{buyEstimate}}</div>
+        </div>        
+        <p>Sell</p>
+        <div layout horizontal>
+          <paper-slider min="0" max="{{maxSell}}" pin value="0" flex
+          on-core-change="{{estimateSell}}" id="sell-slider"
+          ></paper-slider>
+          <div style="width: 100px; text-align:right;">{{sellEstimate}}</div>
+        </div>       
+      </div>
+      <paper-button label="Kašlu na to" dismissive></paper-button>
+      <paper-button label="Jo!" affirmative autofocus></paper-button>
+    </paper-dialog>
+    
     
   </template>
   <script type="application/dart" src="ma_planet_detail.dart"></script>

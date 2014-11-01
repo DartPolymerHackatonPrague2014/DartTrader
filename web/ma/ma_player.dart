@@ -1,11 +1,13 @@
-import 'game.dart';
+import 'game.dart' as g;
 import 'package:polymer/polymer.dart';
 
 
 @CustomTag('ma-player')
 class MaPlayer extends PolymerElement {
   
-  @published Player player;
+  @published g.Player player;
+  
+  @observable List<g.Comodity> comodities = g.COMODITIES;  
   
   MaPlayer.created() : super.created() {
   }

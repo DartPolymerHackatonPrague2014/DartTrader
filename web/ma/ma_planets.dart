@@ -7,6 +7,7 @@ class MaPlanets extends PolymerElement {
   
   @published List<g.Planet> planets;
   @published g.Player player;
+  @published g.Planet selectedPlanet;
     
   MaPlanets.created() : super.created() {
   }      

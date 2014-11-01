@@ -5,7 +5,17 @@ import 'package:observe/observe.dart';
 Random random = new Random();
 
 int SPACE_SIZE= 1000;
-int PLANETS= 10;
+int PLANETS= 100;
+
+int BASE_FUEL_PRICE = 10;
+
+List<Comodity> COMODITIES = [
+    new Comodity("Smartphones", 100, 5),
+    new Comodity("Minerals", 10, 1),
+    new Comodity("Food", 10, 1),
+    new Comodity("Androids", 1000, 9)
+];
+
 
 class Game {
   
@@ -37,13 +47,21 @@ class Game {
 
 class Player extends Observable {
   
-  @observable int money = 100;
+  @observable int money = 5000;
   @observable int fuel = 1000;
   
   int x = 0;
   int y = 0;
   
   @observable Planet onPlanet;
+  
+  @observable Map<Comodity, int> comodities = { };
+  
+  Player() {
+    COMODITIES.forEach((c) {
+      comodities[c] = 0;
+    });
+  }
   
 }
 
@@ -94,6 +112,8 @@ class Planet extends Observable {
   
   int size;
   int level;
+  
+  Map<Comodity, ComodityStatus> comodities = { };
      
   Planet(this.game) {
     name = "${NAME1[random.nextInt(NAME1.length)]} ${NAME2[random.nextInt(NAME2.length)]}";
@@ -101,11 +121,56 @@ class Planet extends Observable {
     y = random.nextInt(SPACE_SIZE) - SPACE_SIZE~/2;
     size = random.nextInt(3)+1;
     level = random.nextInt(10)+1;
+    
+    COMODITIES.forEach((c) {
+      ComodityStatus s = new ComodityStatus();
+      comodities[c] = s;
+      if (c.level > level) {
+        s..available = false
+         ..amount = 0
+         ..priceBuy = 0
+         ..priceSell = 0;
+        
+      } else {
+        s..available = true
+         ..amount = 500*size + random.nextInt(500*size)
+         ..priceSell = (countPrice(c.basePrice) * 1.05).round()
+         ..priceBuy = (countPrice(c.basePrice) * 0.95).round();
+      }
+    });    
+  }
+  
+  int get fuelPrice {
+    return countPrice(BASE_FUEL_PRICE);
+  }
+    
+  int countPrice(int base) {
+    double price = base / (size * 0.5);    
+    price = price - level;
+    int toReturn = price.round();
+    if (toReturn <= 0) return 1;
+    return toReturn;    
   }
   
   int get distance {    
     return sqrt(pow(x-game.player.x, 2) + pow(y-game.player.y, 2)).round();    
-  }
-    
+  }    
   
+}
+
+class Comodity {
+  
+  String name;
+  int basePrice;
+  int level;
+  
+  Comodity(this.name, this.basePrice, this.level);
+   
+}
+
+class ComodityStatus extends Observable {
+  bool available;
+  @observable int amount;
+  @observable int priceBuy;
+  @observable int priceSell;
 }

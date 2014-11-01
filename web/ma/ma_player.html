@@ -1,7 +1,16 @@
 <link rel="import" href="packages/paper_elements/paper_item.html">        
 <polymer-element name="ma-player" attributes="player">
   <template>    
-    Prachy: {{player.money}}, Fuel: {{player.fuel}}, Na planete: {{player.onPlanet.name}}
+    <h3>On planet: {{player.onPlanet.name}}</h3>
+    
+    <div layout horizontal style="padding-bottom: 2em;">
+      <div flex>Prachy: {{player.money}}</div>
+      <div flex>Fuel: {{player.fuel}}</div>
+      <template repeat="{{c in comodities}}">
+        <div flex>{{c.name}}: {{player.comodities[c]}} ks</div>
+      </template>    
+    </div>    
+    
   </template>
   <script type="application/dart" src="ma_player.dart"></script>
 </polymer-element>
