@@ -1,6 +1,7 @@
 import 'game.dart' as g;
 import 'package:polymer/polymer.dart';
 import 'package:paper_elements/paper_dialog.dart';
+import 'package:paper_elements/paper_toast.dart';
 import 'package:paper_elements/paper_slider.dart';
 
 import 'dart:html';
@@ -31,10 +32,15 @@ class MaPlanetDetail extends PolymerElement {
   }
 
   void openDialog(Event e, var detail, Node sender) {
+    if (planet != player.onPlanet) {
+      warpToast();
+      return;
+    }
+    
     tradingComodity = comodities[int.parse(sender.dataset["comodity"])];
     
     maxBuy = min((player.money / planet.comodities[tradingComodity].priceSell).floor(), planet.comodities[tradingComodity].amount);
-    maxSell = 0;
+    maxSell = player.comodities[tradingComodity];
     
     PaperDialog dialog = $['buySell'];
     ($['buy-slider'] as PaperSlider).value = 0;
@@ -57,9 +63,24 @@ class MaPlanetDetail extends PolymerElement {
   void doTrade(Event e, var detail, Node sender) {
     PaperSlider ps = ($['buy-slider'] as PaperSlider);
     int buy = ps.value;
-    player.comodities[tradingComodity] += buy;
-    player.money -= buy * planet.comodities[tradingComodity].priceSell;
-    print("Buy: ${buy}");
+    if (buy > 0) {
+      player.comodities[tradingComodity] += buy;
+      player.money -= buy * planet.comodities[tradingComodity].priceSell;
+      print("Buy: ${buy}");
+    }
+    ps = ($['sell-slider'] as PaperSlider);
+    int sell = ps.value;
+    if (sell > 0) {
+      player.comodities[tradingComodity] -= sell;
+      player.money += sell * planet.comodities[tradingComodity].priceBuy;
+      print("Sell: ${sell}");     
+    }
+
+  }
+  
+  void warpToast() {
+    PaperToast pt = ($['warp-toast'] as PaperToast);
+    pt.show();
   }
   
 }

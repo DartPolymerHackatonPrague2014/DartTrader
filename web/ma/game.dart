@@ -10,10 +10,10 @@ int PLANETS= 100;
 int BASE_FUEL_PRICE = 10;
 
 List<Comodity> COMODITIES = [
-    new Comodity("Smartphones", 100, 5),
-    new Comodity("Minerals", 10, 1),
-    new Comodity("Food", 10, 1),
-    new Comodity("Androids", 1000, 9)
+    new Comodity("Smartphones", 100, 5, 2.0),
+    new Comodity("Minerals", 10, 1, -5.0),
+    new Comodity("Food", 10, 1, -10.0),
+    new Comodity("Androids", 1000, 9, 3.0)
 ];
 
 
@@ -135,19 +135,19 @@ class Planet extends Observable {
       } else {
         s..available = true
          ..amount = 500*size + random.nextInt(500*size)
-         ..priceSell = (countPrice(c.basePrice) * 1.05).round()
-         ..priceBuy = (countPrice(c.basePrice) * 0.95).round();
+         ..priceSell = (countPrice(c.basePrice, c.levelCoeficient) * 1.05).round()
+         ..priceBuy = (countPrice(c.basePrice, c.levelCoeficient) * 0.95).round();
       }
     });    
   }
   
   int get fuelPrice {
-    return countPrice(BASE_FUEL_PRICE);
+    return countPrice(BASE_FUEL_PRICE, 1);
   }
     
-  int countPrice(int base) {
+  int countPrice(int base, double coeficient) {
     double price = base / (size * 0.5);    
-    price = price - level;
+    price = price - (level * coeficient);
     int toReturn = price.round();
     if (toReturn <= 0) return 1;
     return toReturn;    
@@ -164,8 +164,9 @@ class Comodity {
   String name;
   int basePrice;
   int level;
+  double levelCoeficient;
   
-  Comodity(this.name, this.basePrice, this.level);
+  Comodity(this.name, this.basePrice, this.level, this.levelCoeficient);
    
 }
 

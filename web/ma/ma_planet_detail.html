@@ -2,6 +2,7 @@
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="packages/paper_elements/paper_dialog.html">
 <link rel="import" href="packages/paper_elements/paper_slider.html">
+<link rel="import" href="packages/paper_elements/paper_toast.html">
 <link rel="import" href="packages/paper_elements/paper_dialog_transition.html">
 <link rel="import" href="packages/core_elements/core_icons.html">        
         
@@ -43,7 +44,7 @@
     <div flex>&nbsp;</div>
     
     <template if="{{player.onPlanet == planet}}">
-    <p>You are here!</p>
+    <p>You are here! Click on comodity to trade!</p>
     
     </template>
     <template if="{{player.onPlanet != planet}}">
@@ -82,6 +83,11 @@
       <paper-button label="Jo!" affirmative autofocus on-click="{{doTrade}}"></paper-button>
     </paper-dialog>
     
+    <paper-toast text="Warp to this planet to trade!" duration="800" id="warp-toast"
+    
+      style="background: #fff; color: #000"
+    
+    ></paper-toast>
     
   </template>
   <script type="application/dart" src="ma_planet_detail.dart"></script>
