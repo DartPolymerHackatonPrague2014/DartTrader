@@ -76,7 +76,6 @@ class Planet extends Observable {
                                "New",
                                "Old",
                                "Alpha",
-                               "Beta",
                                "Proxima",
                                "Nova",
                                "Sweet",
@@ -85,7 +84,11 @@ class Planet extends Observable {
                                "Last",
                                "First",
                                "Dart",
-                               "Dark"
+                               "Dark",
+                               "Evil",
+                               "Shadow",
+                               "Pulsing",
+                               "Green"
                             ];
   
   static List<String> NAME2 = [
@@ -101,7 +104,11 @@ class Planet extends Observable {
                                "Country",
                                "Fortress",
                                "Watch",
-                               "Tower"
+                               "Tower",
+                               "Castle",
+                               "Apple",
+                               "Google",
+                               "Settlement"
                             ];  
   
   Game game;
@@ -134,7 +141,7 @@ class Planet extends Observable {
         
       } else {
         s..available = true
-         ..amount = 500*size + random.nextInt(500*size)
+         ..amount = 100*size + random.nextInt(300*size)
          ..priceSell = (countPrice(c.basePrice, c.levelCoeficient) * 1.05).round()
          ..priceBuy = (countPrice(c.basePrice, c.levelCoeficient) * 0.95).round();
       }
@@ -142,11 +149,11 @@ class Planet extends Observable {
   }
   
   int get fuelPrice {
-    return countPrice(BASE_FUEL_PRICE, 1);
+    return countPrice(BASE_FUEL_PRICE, 1.0);
   }
     
   int countPrice(int base, double coeficient) {
-    double price = base / (size * 0.5);    
+    double price = base / ((size * 0.5)+0.5);    
     price = price - (level * coeficient);
     int toReturn = price.round();
     if (toReturn <= 0) return 1;

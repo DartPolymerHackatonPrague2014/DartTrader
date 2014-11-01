@@ -36,8 +36,14 @@ class MaPlanetDetail extends PolymerElement {
       warpToast();
       return;
     }
-    
+
     tradingComodity = comodities[int.parse(sender.dataset["comodity"])];
+    
+    if (!planet.comodities[tradingComodity].available) {
+      notAvailable();
+      return;
+    }
+    
     
     maxBuy = min((player.money / planet.comodities[tradingComodity].priceSell).floor(), planet.comodities[tradingComodity].amount);
     maxSell = player.comodities[tradingComodity];
@@ -82,5 +88,11 @@ class MaPlanetDetail extends PolymerElement {
     PaperToast pt = ($['warp-toast'] as PaperToast);
     pt.show();
   }
+  
+  void notAvailable() {
+    PaperToast pt = ($['not-available-toast'] as PaperToast);
+    pt.show();
+  }
+  
   
 }
