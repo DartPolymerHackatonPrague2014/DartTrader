@@ -1,7 +1,29 @@
-<link rel="import" href="packages/paper_elements/paper_item.html">        
-<polymer-element name="ma-planet-detail" attributes="planet">
+<link rel="import" href="packages/paper_elements/paper_item.html">
+<link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="packages/core_elements/core_icons.html">        
+        
+<polymer-element name="ma-planet-detail" attributes="planet player">
   <template>    
-    {{planet.name}}
+    {{planet.name}}<br>
+    
+    
+    <template if="{{player.onPlanet == planet}}">
+    You are here!
+    
+    
+    
+    </template>
+    <template if="{{player.onPlanet != planet}}">
+    
+      <template if="{{player.fuel < planet.distance}}">
+        This planet is too far!
+      </template>
+      <template if="{{player.fuel >= planet.distance}}">
+        <paper-button label="Warp here!" icon="check" on-click="{{onClickWarp}}"></paper-button>
+      </template>
+            
+    </template>    
+    
   </template>
   <script type="application/dart" src="ma_planet_detail.dart"></script>
 </polymer-element>

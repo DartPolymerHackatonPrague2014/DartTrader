@@ -1,11 +1,12 @@
-import 'game.dart';
+import 'game.dart' as g;
 import 'package:polymer/polymer.dart';
 import 'dart:html';
 
 @CustomTag('ma-planets')
 class MaPlanets extends PolymerElement {
   
-  @published List<Planet> planets;
+  @published List<g.Planet> planets;
+  @published g.Player player;
     
   MaPlanets.created() : super.created() {
   }      

@@ -1,13 +1,33 @@
 <link rel="import" href="packages/paper_elements/paper_item.html">    
     
-<polymer-element name="ma-planets" attributes="planets">
+<polymer-element name="ma-planets" attributes="planets player">
   <template>
-    <table>
+    <style>
+      .too-far {
+        color: #aaa;
+      }  
+      .center {
+        text-align: center;
+      }
+      .right {
+        text-align: right;
+      }      
+    </style>  
+    <table style="width: 100%">
       <tr>
-        <th>Name</th>
+        <th>#</th>
+        <th>name</th>
+        <th>distance</th>
+        <th>tech level</th>
+        <th>size</th>
       </tr>
-    <tr template repeat="{{ planet in planets | enumerate }}" on-click="{{onPlanetClick}}" data-index="{{planet.index}}">
-          <td>{{planet.index}} {{planet.value.name}}</td>
+    <tr template repeat="{{ planet in planets | enumerate }}" on-click="{{onPlanetClick}}" data-index="{{planet.index}}"
+    class="{{player.fuel > planet.value.distance ? 'near' : 'too-far' }}">
+          <td>{{planet.index + 1}}</td>
+          <td>{{planet.value.name}}</td>
+          <td class="right">{{planet.value.distance}} parsecs</td>
+          <td class="center">{{planet.value.level}}</td>
+          <td class="center">{{planet.value.size}}</td>
     </tr>
     </table>
  </template>

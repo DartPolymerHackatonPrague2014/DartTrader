@@ -7,11 +7,11 @@
   <template>    
     
     <div id="planets" style="height: 70%; width: 69%; float: left; border: 1px solid black; overflow: scroll;">
-      <ma-planets planets="{{game.planets}}" on-select-planet="{{selectPlanet}}"></ma-planets> 
+      <ma-planets planets="{{sortedPlanets}}" player="{{game.player}}" on-select-planet="{{selectPlanet}}"></ma-planets> 
     </div>
     
     <div id="planet" style="height: 70%; width: 29%; float: right; border: 1px solid black;">
-      <ma-planet-detail planet="{{selectedPlanet}}"></ma-planet-detail>  
+      <ma-planet-detail planet="{{selectedPlanet}}" player="{{game.player}}" on-warp="{{warp}}"></ma-planet-detail>  
     </div>
     
     <br style="clear: both;">
